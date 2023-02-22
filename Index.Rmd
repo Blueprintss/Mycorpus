@@ -65,7 +65,7 @@ Column {data-width=350}
 ### Chart B
 
 ```{r}
-
+library(tufte)
 ```
 
 ### Chart C
