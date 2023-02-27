@@ -220,4 +220,4 @@ Column {data-width=350}
 
 ### Notes
 
-I dont see any usable way of incorporating a chromagram into my corpus. If someone has a suggestion I would love to hear it.
+I dont see any usable way of incorporating a chromagram into my corpus. If someone has a suggestion I would love to hear it. Thanks in advance.
