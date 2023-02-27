@@ -1,30 +1,27 @@
 ---
-title: "Untitled"
+title: "Loundness War Over?"
 output: 
   flexdashboard::flex_dashboard:
     orientation: columns
     vertical_layout: fill
+    storyboard: true
 ---
 
 ```{r setup, include=FALSE}
 library(flexdashboard)
-```
-
-Column {data-width=650}
------------------------------------------------------------------------
-
-### Chart A
-
-```{r}
 library(tidyverse)
 library(spotifyr)
 library(ggplot2)
+library(tufte)
+library(plotly)
+library(compmus)
 
 seventies_playlist <- get_playlist_audio_features("", "37i9dQZF1DWTJ7xPn4vNaz?")
 eighties_playlist <- get_playlist_audio_features("", "37i9dQZF1DX4UtSsGT1Sbe?")
 nineties_playlist <- get_playlist_audio_features("", "37i9dQZF1DXbTxeAdrVG2l")
 zeros_playlist <- get_playlist_audio_features("", "37i9dQZF1DX4o1oenSJRJd?")
 tens_playlist <- get_playlist_audio_features("", "37i9dQZF1DX5Ejj0EkURtP?")
+twenties_playlist <- get_playlist_audio_features("", "4vSTV61efRmetmaoz95Vet?")
 
 All_playlist <-
     bind_rows(
@@ -32,17 +29,87 @@ All_playlist <-
       eighties_playlist |> mutate(category = "Eighties"),
       nineties_playlist |> mutate(category = "Nineties"),
       zeros_playlist |> mutate(category = "Zeros"),
-      tens_playlist |> mutate(category = "Tens")
+      tens_playlist |> mutate(category = "Tens"),
+      twenties_playlist |> mutate(category = "20s")
     )
 
 Arranged_playlists <- All_playlist %>%
   arrange(playlist_name)
 
-PLaylist_labs <- c("Seventies", "Eighties", "Nineties", "Zeros", "Tens")
+Mean_playlists <- Arranged_playlists %>%
+  group_by(playlist_name) %>%
+  summarise(mean_loudness = mean(loudness))
 
-ggplot(Arranged_playlists, aes(playlist_name, loudness)) +
+PLaylist_labs <- c("70s", "80s", "90s", "00s", "10s", "20s")
+```
+
+Introduction
+=======================================================================
+
+### Introduction to My Corpus
+
+My Corpus is about the Loudness War, by using big data I'm wondering if the loudness from tracks really peaked during the Loudnesswar and if with the normalization tools from streaming services nowadays, the loudness from songs decreases again. I choose this, because i really hated the loudness war since my ear fatiqued way sooner and music was just flat. I really hope to find some proof that nowadays the loudnass war is finally ending.
+				My comparison points are from the Loudness factor of the spotify database, In which i will comapre the output of the different decennias with the development of the loudness war.
+				The represantion is only limited by the amount of data it covers, since im not able to track all the music in the world i will pick the All out Playlist from the 70-10s to make my case. 
+
+At the same time i will look at the Music of my favorite band The Red Hot Chili Peppers, since they have produced albums since the 80s, it would be nice to see if they will follow the Loudness mean loudness trend.
+
+
+Loudness War {data-navmenu=Background}
+===========================================================================
+
+### Background Loudness War
+
+The Loudness War refers to a trend in music production where songs are made as loud as possible, often at the expense of dynamic range and sound quality. This is achieved through the use of various compression and limiting techniques that increase the volume of a recording, which can make it sound more aggressive and powerful.
+
+The goal of the Loudness War is to make a song stand out on the radio or in a playlist, where louder songs are more likely to catch the listener's attention. However, this pursuit of loudness has led to the overuse of these techniques, which can result in distortion, loss of detail, and listener fatigue.
+
+While loudness can be effective in some contexts, such as in rock or electronic music, it can also detract from the emotional impact of a song, and make it sound more monotonous or tiresome over time. As a result, many music professionals and fans advocate for a return to more natural, dynamic sound production, and for musicians to prioritize the quality and impact of their music over sheer volume.
+
+Red Hot Chili Peppers {data-navmenu=Background}
+===========================================================================
+
+### Optional: Background RHCP
+
+The Red Hot Chili Peppers (RHCP) are an American rock band formed in Los Angeles, California, in 1983. 
+HCP's style combines elements of funk, punk, and rock music,
+RHCP's music often deals with themes of love, sexuality, and California culture
+The band has sold over 80 million records worldwide, making them one of the best-selling bands of all time.
+
+The Red Hot Chili Peppers have released a total of 11 studio albums, several live albums, compilations, and EPs. Here's a brief overview of their discography:
+
+The Red Hot Chili Peppers (1984) - This is the band's debut album, featuring a more punk rock sound and an early lineup that included founding members Anthony Kiedis, Flea, Hillel Slovak, and Jack Irons.
+
+Freaky Styley (1985) - This album saw the band exploring more funk and soul influences, with George Clinton producing.
+
+The Uplift Mofo Party Plan (1987) - This album marked the return of guitarist Hillel Slovak and drummer Jack Irons to the band, and is considered one of their most energetic and raw releases.
+Mother's Milk (1989) - This album marked a major breakthrough for the band, with the hits "Higher Ground" and "Knock Me Down" gaining them mainstream attention.
+Blood Sugar Sex Magik (1991) - This album is considered a masterpiece by many, featuring the hit singles "Give It Away," "Under the Bridge," and "Suck My Kiss." It remains one of the band's most successful and beloved releases.
+One Hot Minute (1995) - This album marked the departure of guitarist John Frusciante, and the arrival of new guitarist Dave Navarro. The album saw the band experimenting with more psychedelic and heavy rock sounds.
+Californication (1999) - This album marked the return of John Frusciante to the band, and saw them returning to a more melodic and accessible sound. The title track and "Scar Tissue" became massive hits.
+By the Way (2002) - This album continued in the vein of Californication, with a more polished and pop-oriented sound. Hits included "By the Way" and "Can't Stop."
+Stadium Arcadium (2006) - This double album is one of the band's most ambitious releases, featuring a diverse range of styles and sounds. It won the band multiple Grammy Awards, including Best Rock Album.
+I'm with You (2011) - This album marked the departure of guitarist John Frusciante, and the arrival of new guitarist Josh Klinghoffer. The album saw the band experimenting with more electronic and atmospheric sounds.
+The Getaway (2016) - This album marked the return of producer Danger Mouse, and saw the band continuing to explore new sounds and styles. The title track and "Dark Necessities" were popular singles.
+Unlimited Love (2022) -
+
+
+
+
+
+Charts
+======================================================================
+
+Column {data-width=600}
+-----------------------------------------------------------------------
+
+### Chart A
+
+```{r plot 1}
+
+Plot_Arranged_playlists <- ggplot(Arranged_playlists, aes(playlist_name, loudness)) +
   geom_boxplot() +
-  scale_x_discrete(limits=c("All Out 70s", "All Out 80s", "All Out 90s", "All Out 2000s", "All Out 2010s"),
+  scale_x_discrete(limits=c("All Out 70s", "All Out 80s", "All Out 90s", "All Out 2000s", "All Out 2010s", "All Out 2020s"),
                    labels= PLaylist_labs) +
   # Theme
   theme_classic() +
@@ -57,20 +124,100 @@ ggplot(Arranged_playlists, aes(playlist_name, loudness)) +
     
   ylab("Relative Loudness in DB")
 
+# plotly
+ggplotly(Plot_Arranged_playlists)
+
+```
+
+Column {data-width=400}
+-----------------------------------------------------------------------
+
+### Chart B
+```{r plot 2}
+
+Plot_Mean_playlists <- ggplot(Mean_playlists, aes(playlist_name, mean_loudness)) +
+  geom_point() +
+  scale_x_discrete(limits=c("All Out 70s", "All Out 80s", "All Out 90s", "All Out 2000s", "All Out 2010s", "All Out 2020s"),
+                   labels= PLaylist_labs) +
+# Theme
+  theme_classic() +
+  theme(axis.line.x = element_blank()
+  ) +
+  # Labs
+  labs(title = "Mean Loudness Through The Decades",
+       caption = "Source: Spotify"
+  ) +
+    
+  xlab("Playlists") +
+    
+  ylab("Mean Relative Loudness in DB")
+
+# plotly
+ggplotly(Plot_Mean_playlists)
+
+```
+
+
+### Extra explanition plots
+
+Charts are hopefuly selfexplanitory otherwise i will write something here
+
+
+Conclusion {data-navmenu=Conclusion}
+=======================================================================
+
+Conclusion Research:
+
+Discussion {data-navmenu=Conclusion}
+=======================================================================
+
+One thing what really influences this research is the influence of remasters. For example Smooth Criminial from Michael Jackson in the playlist is an Remaster. Sadly more often than not the orignial master isn't available on spotify. So the original data is not always available for this research. Understandle enough this makes the research less of a representation than wished for.
+
+Source {data-navmenu=Conclusion}
+=======================================================================
+
+Spotify playlists used:
+
+Homework
+======================================================================
+
+Column {data-width=650}
+-----------------------------------------------------------------------
+
+### Chromagram: Calfornication - RHCP
+
+```{r chromagram}
+
+# Breakout Session 2
+
+Californication <-
+  get_tidy_audio_analysis("34KTEhpPjq6IAgQg2yzJAL?") |>
+  select(segments) |>
+  unnest(segments) |>
+  select(start, duration, pitches)
+
+Californication |>
+  mutate(pitches = map(pitches, compmus_normalise, "chebyshev")) |>
+  compmus_gather_chroma() |> 
+  ggplot(
+    aes(
+      x = start + duration / 2,
+      width = duration,
+      y = pitch_class,
+      fill = value
+    )
+  ) +
+  geom_tile() +
+  labs(x = "Time (s)", y = NULL, fill = "Magnitude") +
+  theme_minimal() +
+  scale_fill_viridis_c()
+
+
 ```
 
 Column {data-width=350}
 -----------------------------------------------------------------------
 
-### Chart B
+### Notes
 
-```{r}
-
-```
-
-### Chart C
-
-```{r}
-
-```
-
+I dont see any usable way of incorporating a chromagram into my corpus. If someone has a suggestion I would love to hear it.
