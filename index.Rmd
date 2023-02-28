@@ -52,7 +52,7 @@ My Corpus is about the Loudness War, by using big data I'm wondering if the loud
 				My comparison points are from the Loudness factor of the spotify database, In which i will comapre the output of the different decennias with the development of the loudness war.
 				The represantion is only limited by the amount of data it covers, since im not able to track all the music in the world i will pick the All out Playlist from the 70-10s to make my case. 
 
-At the same time i will look at the Music of my favorite band The Red Hot Chili Peppers, since they have produced albums since the 80s, it would be nice to see if they will follow the Loudness mean loudness trend.
+At the same time i will look at the music of my favorite band The Red Hot Chili Peppers, since they have produced albums since the 80s, it would be nice to see if they have followed the Loudness trend.
 
 
 Loudness War {data-navmenu=Background}
