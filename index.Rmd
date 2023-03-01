@@ -5,6 +5,7 @@ output:
     orientation: columns
     vertical_layout: fill
     storyboard: true
+    self_contained: false
 ---
 
 ```{r setup, include=FALSE}
@@ -50,9 +51,11 @@ Introduction
 
 My Corpus is about the Loudness War, by using big data I'm wondering if the loudness from tracks really peaked during the Loudnesswar and if with the normalization tools from streaming services nowadays, the loudness from songs decreases again. I choose this, because i really hated the loudness war since my ear fatiqued way sooner and music was just flat. I really hope to find some proof that nowadays the loudnass war is finally ending.
 				My comparison points are from the Loudness factor of the spotify database, In which i will comapre the output of the different decennias with the development of the loudness war.
-				The represantion is only limited by the amount of data it covers, since im not able to track all the music in the world i will pick the All out Playlist from the 70-10s to make my case. 
+				The representation is only limited by the amount of data it covers, since im not able to track all the music in the world i will pick the All out Playlist from the 70-10s to make my case. 
 
 At the same time i will look at the music of my favorite band The Red Hot Chili Peppers, since they have produced albums since the 80s, it would be nice to see if they have followed the Loudness trend.
+
+### Loudness en energie vergelijken 
 
 
 Loudness War {data-navmenu=Background}
