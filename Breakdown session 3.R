@@ -1,2 +1,0 @@
-### Breakdown session 3
-

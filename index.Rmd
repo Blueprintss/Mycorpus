@@ -55,7 +55,7 @@ My Corpus is about the Loudness War, by using big data I'm wondering if the loud
 
 At the same time i will look at the music of my favorite band The Red Hot Chili Peppers, since they have produced albums since the 80s, it would be nice to see if they have followed the Loudness trend.
 
-### Loudness en energie vergelijken 
+### Loudness en energie vergelijken, text = paste(track.name)
 
 
 Loudness War {data-navmenu=Background}
