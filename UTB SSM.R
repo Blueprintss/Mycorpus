@@ -1,13 +1,14 @@
-### Snow SSM
-### Timbre naar pitches voor chromo SSM
+### Under the Bridge SSM
+
+### Idee: vergelijk snow met UTb qua c01 = loudness. Meer loudness is minder dynamic rangen is hemogoniser c01
 
 library(tidyverse)
 library(spotifyr)
 library(compmus)
 
 
-Snow <-
-  get_tidy_audio_analysis("2aibwv5hGXSgw7Yru8IYTO") |> # Change URI.
+UTB <-
+  get_tidy_audio_analysis("3d9DChrdc6BOeFsbrZ3Is0") |> # Change URI.
   compmus_align(bars, segments) |>                     # Change `bars`
   select(bars) |>                                      #   in all three
   unnest(bars) |>                                      #   of these lines.
@@ -26,7 +27,7 @@ Snow <-
       )
   )
 
-Snow |>
+UTB |>
   compmus_self_similarity(timbre, "cosine") |> 
   ggplot(
     aes(

@@ -2,6 +2,7 @@
 
 ### Idee: vergelijk snow met UTb qua c01 = loudness. Meer loudness is minder dynamic rangen is hemogoniser c01
 
+
 library(tidyverse)
 library(spotifyr)
 library(compmus)
