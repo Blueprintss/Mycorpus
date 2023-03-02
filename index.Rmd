@@ -24,6 +24,8 @@ zeros_playlist <- get_playlist_audio_features("", "37i9dQZF1DX4o1oenSJRJd?")
 tens_playlist <- get_playlist_audio_features("", "37i9dQZF1DX5Ejj0EkURtP?")
 twenties_playlist <- get_playlist_audio_features("", "4vSTV61efRmetmaoz95Vet?")
 
+RHCP_Songs <- get_playlist_audio_features("", "761qISmudNnnQ99BvnU4wo?")
+
 All_playlist <-
     bind_rows(
       seventies_playlist |> mutate(category = "Seventies"),
@@ -35,14 +37,31 @@ All_playlist <-
     )
 
 Arranged_playlists <- All_playlist %>%
+  filter(loudness > -18) %>%
   arrange(playlist_name)
 
-Mean_playlists <- Arranged_playlists %>%
+Mean_Loudness_playlists <- Arranged_playlists %>%
   group_by(playlist_name) %>%
   summarise(mean_loudness = mean(loudness))
 
+Mean_Energy_playlists <- Arranged_playlists %>%
+  group_by(playlist_name) %>%
+  summarise(mean_energy = mean(energy))
+
 PLaylist_labs <- c("70s", "80s", "90s", "00s", "10s", "20s")
+
+Arranged_Album_RHCP_Songs <- RHCP_Songs %>%
+  arrange(track.album.release_date)
+
 ```
+
+Homework
+======================================================================
+
+**See Visualisation -> Cesptrogram**
+
+
+
 
 Introduction
 =======================================================================
@@ -50,12 +69,13 @@ Introduction
 ### Introduction to My Corpus
 
 My Corpus is about the Loudness War, by using big data I'm wondering if the loudness from tracks really peaked during the Loudnesswar and if with the normalization tools from streaming services nowadays, the loudness from songs decreases again. I choose this, because i really hated the loudness war since my ear fatiqued way sooner and music was just flat. I really hope to find some proof that nowadays the loudnass war is finally ending.
-				My comparison points are from the Loudness factor of the spotify database, In which i will comapre the output of the different decennias with the development of the loudness war.
+				
+My comparison points are from the Loudness factor of the spotify database, In which i will compare the output of the different decennia with the development of the loudness war.
 				The representation is only limited by the amount of data it covers, since im not able to track all the music in the world i will pick the All out Playlist from the 70-10s to make my case. 
 
-At the same time i will look at the music of my favorite band The Red Hot Chili Peppers, since they have produced albums since the 80s, it would be nice to see if they have followed the Loudness trend.
+My expectation is that the relative loudness wil decline at the same time that streaming services started to gain a lot of members. Since all the streaming services use normalization (every song is equally loud), and with that their isn't any beneficial factor left for making a song sheer loud. I suspect producers will focus again on quality and impact.
 
-### Loudness en energie vergelijken, text = paste(track.name)
+At the same time i will look at the music of my favorite band The Red Hot Chili Peppers, since they have produced albums since the 80s, I would be interesting to see if they have followed the Loudness trend.
 
 
 Loudness War {data-navmenu=Background}
@@ -72,7 +92,7 @@ While loudness can be effective in some contexts, such as in rock or electronic 
 Red Hot Chili Peppers {data-navmenu=Background}
 ===========================================================================
 
-### Optional: Background RHCP
+### Background RHCP
 
 The Red Hot Chili Peppers (RHCP) are an American rock band formed in Los Angeles, California, in 1983. 
 HCP's style combines elements of funk, punk, and rock music,
@@ -84,7 +104,6 @@ The Red Hot Chili Peppers have released a total of 11 studio albums, several liv
 The Red Hot Chili Peppers (1984) - This is the band's debut album, featuring a more punk rock sound and an early lineup that included founding members Anthony Kiedis, Flea, Hillel Slovak, and Jack Irons.
 
 Freaky Styley (1985) - This album saw the band exploring more funk and soul influences, with George Clinton producing.
-
 The Uplift Mofo Party Plan (1987) - This album marked the return of guitarist Hillel Slovak and drummer Jack Irons to the band, and is considered one of their most energetic and raw releases.
 Mother's Milk (1989) - This album marked a major breakthrough for the band, with the hits "Higher Ground" and "Knock Me Down" gaining them mainstream attention.
 Blood Sugar Sex Magik (1991) - This album is considered a masterpiece by many, featuring the hit singles "Give It Away," "Under the Bridge," and "Suck My Kiss." It remains one of the band's most successful and beloved releases.
@@ -94,13 +113,33 @@ By the Way (2002) - This album continued in the vein of Californication, with a 
 Stadium Arcadium (2006) - This double album is one of the band's most ambitious releases, featuring a diverse range of styles and sounds. It won the band multiple Grammy Awards, including Best Rock Album.
 I'm with You (2011) - This album marked the departure of guitarist John Frusciante, and the arrival of new guitarist Josh Klinghoffer. The album saw the band experimenting with more electronic and atmospheric sounds.
 The Getaway (2016) - This album marked the return of producer Danger Mouse, and saw the band continuing to explore new sounds and styles. The title track and "Dark Necessities" were popular singles.
-Unlimited Love (2022) -
+Unlimited Love (2022) - The newest album.
 
 
 
 
 
-Charts
+Background growth Spotify {data-navmenu=Background}
+===========================================================================
+
+Column {data-width=500}
+-----------------------------------------------------------------------
+
+![Growth Spotify](https://www.businessofapps.com/wp-content/uploads/2018/11/Spotify-user-growth-and-features.png)
+
+
+Column {data-width=500}
+-----------------------------------------------------------------------
+
+![Sales CD](https://i.pinimg.com/originals/26/39/2e/26392e02222893393165324e0ab3ed0c.jpg)
+
+
+### Notes
+
+As seen in the graph spotify started to take off in the end of the 00s. At the same time we see a massive decline in Sales for CD's. This suggest a correlation. I get back on this in the conclusion.
+
+
+Main charts {data-navmenu=Visualisation}
 ======================================================================
 
 Column {data-width=600}
@@ -110,7 +149,8 @@ Column {data-width=600}
 
 ```{r plot 1}
 
-Plot_Arranged_playlists <- ggplot(Arranged_playlists, aes(playlist_name, loudness)) +
+
+Plot_Arranged_playlists <- ggplot(Arranged_playlists, aes(playlist_name, loudness, text = paste(track.name))) +
   geom_boxplot() +
   scale_x_discrete(limits=c("All Out 70s", "All Out 80s", "All Out 90s", "All Out 2000s", "All Out 2010s", "All Out 2020s"),
                    labels= PLaylist_labs) +
@@ -138,7 +178,7 @@ Column {data-width=400}
 ### Chart B
 ```{r plot 2}
 
-Plot_Mean_playlists <- ggplot(Mean_playlists, aes(playlist_name, mean_loudness)) +
+Plot_Mean_Loudness_playlists <- ggplot(Mean_Loudness_playlists, aes(playlist_name, mean_loudness)) +
   geom_point() +
   scale_x_discrete(limits=c("All Out 70s", "All Out 80s", "All Out 90s", "All Out 2000s", "All Out 2010s", "All Out 2020s"),
                    labels= PLaylist_labs) +
@@ -156,7 +196,7 @@ Plot_Mean_playlists <- ggplot(Mean_playlists, aes(playlist_name, mean_loudness))
   ylab("Mean Relative Loudness in DB")
 
 # plotly
-ggplotly(Plot_Mean_playlists)
+ggplotly(Plot_Mean_Loudness_playlists)
 
 ```
 
@@ -166,23 +206,42 @@ ggplotly(Plot_Mean_playlists)
 Charts are hopefuly selfexplanitory otherwise i will write something here
 
 
-Conclusion {data-navmenu=Conclusion}
-=======================================================================
+Energy vs Loudness {data-navmenu=Visualisation}
+=====================================================================
 
-Conclusion Research:
 
-Discussion {data-navmenu=Conclusion}
-=======================================================================
+```{r plot 3 energy}
 
-One thing what really influences this research is the influence of remasters. For example Smooth Criminial from Michael Jackson in the playlist is an Remaster. Sadly more often than not the orignial master isn't available on spotify. So the original data is not always available for this research. Understandle enough this makes the research less of a representation than wished for.
+Plot_Mean_Energy_playlists <- ggplot(Mean_Energy_playlists, aes(playlist_name, mean_energy)) +
+  geom_point() +
+  scale_x_discrete(limits=c("All Out 70s", "All Out 80s", "All Out 90s", "All Out 2000s", "All Out 2010s", "All Out 2020s"),
+                   labels= PLaylist_labs) +
+# Theme
+  theme_classic() +
+  theme(axis.line.x = element_blank()
+  ) +
+  # Labs
+  labs(title = "Mean Energy Through The Decades",
+       caption = "Source: Spotify"
+  ) +
+    
+  xlab("Playlists") +
+    
+  ylab("Mean Energy")
 
-Source {data-navmenu=Conclusion}
-=======================================================================
+# plotly
+ggplotly(Plot_Mean_Energy_playlists)
 
-Spotify playlists used:
+#MAKE A PLOT THAT HAS BOTH MEAN LOUDNESS AND MEAN ENERGY IN A LINE PLOT Y SCALE Differnet is problem!
 
-Homework
+```
+
+
+
+
+Chromagram {data-navmenu=Visualisation}
 ======================================================================
+
 
 Column {data-width=650}
 -----------------------------------------------------------------------
@@ -224,3 +283,128 @@ Column {data-width=350}
 ### Notes
 
 I dont see any usable way of incorporating a chromagram into my corpus. If someone has a suggestion I would love to hear it. Thanks in advance.
+
+
+
+
+
+Cesptrogram {data-navmenu=Visualisation}
+======================================================================
+
+Column 
+-----------------------------------------------------------------------
+
+### Cesptrogram: RHCP - Under The Bridge (1991)
+
+```{r Cesptrogram 1}
+
+UTB <-
+  get_tidy_audio_analysis("3d9DChrdc6BOeFsbrZ3Is0") |> # Change URI.
+  compmus_align(bars, segments) |>                     # Change `bars`
+  select(bars) |>                                      #   in all three
+  unnest(bars) |>                                      #   of these lines.
+  mutate(
+    pitches =
+      map(segments,
+          compmus_summarise, pitches,
+          method = "rms", norm = "euclidean"              # Change summary & norm.
+      )
+  ) |>
+  mutate(
+    timbre =
+      map(segments,
+          compmus_summarise, timbre,
+          method = "rms", norm = "euclidean"              # Change summary & norm.
+      )
+  )
+
+UTB |>
+  compmus_gather_timbre() |>
+  ggplot(
+    aes(
+      x = start + duration / 2,
+      width = duration,
+      y = basis,
+      fill = value
+    )
+  ) +
+  geom_tile() +
+  labs(x = "Time (s)", y = NULL, fill = "Magnitude") +
+  scale_fill_viridis_c() +                              
+  theme_classic()
+
+
+```
+
+
+Column 
+-----------------------------------------------------------------------
+
+### Cepstrogram: RHCP - Snow (2006)
+
+``` {r Cepstrogram 2}
+
+Snow <-
+  get_tidy_audio_analysis("2aibwv5hGXSgw7Yru8IYTO") |> # Change URI.
+  compmus_align(bars, segments) |>                     # Change `bars`
+  select(bars) |>                                      #   in all three
+  unnest(bars) |>                                      #   of these lines.
+  mutate(
+    pitches =
+      map(segments,
+          compmus_summarise, pitches,
+          method = "rms", norm = "euclidean"              # Change summary & norm.
+      )
+  ) |>
+  mutate(
+    timbre =
+      map(segments,
+          compmus_summarise, timbre,
+          method = "rms", norm = "euclidean"              # Change summary & norm.
+      )
+  )
+
+Snow |>
+  compmus_gather_timbre() |>
+  ggplot(
+    aes(
+      x = start + duration / 2,
+      width = duration,
+      y = basis,
+      fill = value
+    )
+  ) +
+  geom_tile() +
+  labs(x = "Time (s)", y = NULL, fill = "Magnitude") +
+  scale_fill_viridis_c() +                              
+  theme_classic()
+
+```
+
+### Notes
+
+I choose to make 2 cepstrograms, since my corpus is so loudness based the c01 (loudness factor) is the obivious most interseting factor to focus on here. As explained in the background the loudnesswar has an influence on the dynamic range. This is very good visible in these examples :
+
+The song Snow from 2006 has a lot of homogenity in the c01 factor which respresents the same loudness trough the entire song, apart form the intro en end..
+
+On the other hand the song Under The Bridge from 1991 is very different. The c01 from this graph is obviously more different throughout the entire song, which snow a lot of dynamic range thourgh the entire song.
+
+These observations perfecly align with my hypotheses.
+
+
+Conclusion {data-navmenu=Conclusion}
+=======================================================================
+
+Conclusion Research:
+
+Discussion {data-navmenu=Conclusion}
+=======================================================================
+
+One thing what really influences this research is the influence of remasters. For example Smooth Criminial from Michael Jackson in the playlist is an Remaster. Sadly more often than not the orignial master isn't available on spotify. So the original data is not always available for this research. Understandle enough this makes the research less of a representation than wished for.
+
+Source {data-navmenu=Conclusion}
+=======================================================================
+
+Spotify playlists used:
+
+
