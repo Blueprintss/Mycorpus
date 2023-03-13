@@ -527,7 +527,7 @@ Column
 
 ``` {r SD1}
 
-Arranged_playlists |>
+Arranged_playlists_analysis |>
   mutate(
     timbre =
       map(
@@ -554,7 +554,7 @@ Column
 
 ``` {r SD 2}
 
-Arranged_playlists |>
+Arranged_playlists_analysis |>
   mutate(
     sections =
       map(
