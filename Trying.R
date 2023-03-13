@@ -1,8 +1,10 @@
+library(flexdashboard)
 library(tidyverse)
 library(spotifyr)
 library(ggplot2)
 library(tufte)
 library(plotly)
+library(compmus)
 
 seventies_playlist <- get_playlist_audio_features("", "37i9dQZF1DWTJ7xPn4vNaz?")
 eighties_playlist <- get_playlist_audio_features("", "37i9dQZF1DX4UtSsGT1Sbe?")
@@ -11,6 +13,8 @@ zeros_playlist <- get_playlist_audio_features("", "37i9dQZF1DX4o1oenSJRJd?")
 tens_playlist <- get_playlist_audio_features("", "37i9dQZF1DX5Ejj0EkURtP?")
 twenties_playlist <- get_playlist_audio_features("", "4vSTV61efRmetmaoz95Vet?")
 
+RHCP_Songs <- get_playlist_audio_features("", "761qISmudNnnQ99BvnU4wo?")
+
 All_playlist <-
   bind_rows(
     seventies_playlist |> mutate(category = "Seventies"),
@@ -18,18 +22,34 @@ All_playlist <-
     nineties_playlist |> mutate(category = "Nineties"),
     zeros_playlist |> mutate(category = "Zeros"),
     tens_playlist |> mutate(category = "Tens"),
-    twenties_playlist |> mutate(category = "Twenties")
+    twenties_playlist |> mutate(category = "20s")
   )
 
+
 Arranged_playlists <- All_playlist %>%
-  arrange(playlist_name)
+  filter(loudness > -18) %>%
+  summarise(playlist_name)
+
+Ar <-factor(All_playlist, levels = c("70s", "80s", "90s", "00s", "10s", "20s"))
+  
+
+Mean_Loudness_playlists <- Arranged_playlists %>%
+  group_by(playlist_name) %>%
+  summarise(mean_loudness = mean(loudness))
+
+Mean_Energy_playlists <- Arranged_playlists %>%
+  group_by(playlist_name) %>%
+  summarise(mean_energy = mean(energy))
 
 PLaylist_labs <- c("70s", "80s", "90s", "00s", "10s", "20s")
 
-Plot_Arranged_playlists <- ggplot(Arranged_playlists, aes(playlist_name, loudness)) +
+Arranged_Album_RHCP_Songs <- RHCP_Songs %>%
+  arrange(track.album.release_date)
+
+
+Plot_Arranged_playlists <- ggplot(Arranged_playlists, aes(Ar, loudness, text = paste(track.name))) +
   geom_boxplot() +
-  scale_x_discrete(limits=c("All Out 70s", "All Out 80s", "All Out 90s", "All Out 2000s", "All Out 2010s", "All Out 2020s"),
-                   labels= PLaylist_labs) +
+  scale_x_discrete(labels= PLaylist_labs) +
   # Theme
   theme_classic() +
   theme(axis.line.x = element_blank()
@@ -48,15 +68,22 @@ ggplotly(Plot_Arranged_playlists)
 
 
 
+  
+  ### Chart B
 
-## Plot 2
+Plot_Mean_Loudness_playlists <- ggplot(Mean_Loudness_playlists, aes(playlist_name, mean_loudness)) +
+  geom_point() +
+  scale_x_discrete(labels= PLaylist_labs) +
+  # Theme
+  theme_classic() +
+  theme(axis.line.x = element_blank()
+  ) +
+  # Labs
+  labs(title = "Mean Loudness Through The Decades",
+       caption = "Source: Spotify"
+  ) +
+  
+  xlab("Playlists") +
+  
+  ylab("Mean Relative Loudness in DB")
 
-Mean_playlists <- Arranged_playlists %>%
-  group_by(playlist_name) %>%
-  summarise(mean_loudness = mean(loudness))
-
-ggplot(Mean_playlists, aes(playlist_name, mean_loudness) +
-         geom_point()
-
-       
-## Timbre plot chords?
