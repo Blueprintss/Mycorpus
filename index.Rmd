@@ -17,24 +17,8 @@ library(tufte)
 library(plotly)
 library(compmus)
 
-seventies_playlist <- get_playlist_audio_features("", "37i9dQZF1DWTJ7xPn4vNaz?")
-eighties_playlist <- get_playlist_audio_features("", "37i9dQZF1DX4UtSsGT1Sbe?")
-nineties_playlist <- get_playlist_audio_features("", "37i9dQZF1DXbTxeAdrVG2l")
-zeros_playlist <- get_playlist_audio_features("", "37i9dQZF1DX4o1oenSJRJd?")
-tens_playlist <- get_playlist_audio_features("", "37i9dQZF1DX5Ejj0EkURtP?")
-twenties_playlist <- get_playlist_audio_features("", "4vSTV61efRmetmaoz95Vet?")
-
-RHCP_Songs <- get_playlist_audio_features("", "761qISmudNnnQ99BvnU4wo?")
-
-All_playlist <-
-    bind_rows(
-      seventies_playlist |> mutate(category = "Seventies"),
-      eighties_playlist |> mutate(category = "Eighties"),
-      nineties_playlist |> mutate(category = "Nineties"),
-      zeros_playlist |> mutate(category = "Zeros"),
-      tens_playlist |> mutate(category = "Tens"),
-      twenties_playlist |> mutate(category = "20s")
-    )
+## 70s-20s
+All_playlist <- readRDS(file = "data/All_playlist.RDS")
 
 Arranged_playlists <- All_playlist %>%
   filter(loudness > -18) %>%
@@ -44,47 +28,33 @@ Mean_Loudness_playlists <- Arranged_playlists %>%
   group_by(playlist_name) %>%
   summarise(mean_loudness = mean(loudness))
 
-Mean_Energy_playlists <- Arranged_playlists %>%
+Mean_Energy_Loundess_playlists <- Arranged_playlists %>%
   group_by(playlist_name) %>%
-  summarise(mean_energy = mean(energy))
+  summarise(mean_energy = mean(energy), mean_loudnesss = mean(loudness))
 
 Playlist_labs <- c("70s", "80s", "90s", "00s", "10s", "20s")
+
+
+
+##RHCP
+RHCP_Songs <- get_playlist_audio_features("", "761qISmudNnnQ99BvnU4wo?")
 
 Arranged_Album_RHCP_Songs <- RHCP_Songs %>%
   arrange(track.album.release_date)
 
 
-seventies_playlist <- get_playlist_audio_features("", "37i9dQZF1DWTJ7xPn4vNaz?")|>
-  slice(1:30) |>
-  add_audio_analysis()
-eighties_playlist <- get_playlist_audio_features("", "37i9dQZF1DX4UtSsGT1Sbe?")  |>
-  slice(1:30) |>
-  add_audio_analysis()
-nineties_playlist <- get_playlist_audio_features("", "37i9dQZF1DXbTxeAdrVG2l") |>
-  slice(1:30) |>
-  add_audio_analysis()
-zeros_playlist <- get_playlist_audio_features("", "37i9dQZF1DX4o1oenSJRJd?") |>
-  slice(1:30) |>
-  add_audio_analysis()
-tens_playlist <- get_playlist_audio_features("", "37i9dQZF1DX5Ejj0EkURtP?") |>
-  slice(1:30) |>
-  add_audio_analysis()
-twenties_playlist <- get_playlist_audio_features("", "4vSTV61efRmetmaoz95Vet?") |>
-  slice(1:30) |>
-  add_audio_analysis()
 
-All_playlist_analysis <-
-  bind_rows(
-    seventies_playlist |> mutate(category = "Seventies"),
-    eighties_playlist |> mutate(category = "Eighties"),
-    nineties_playlist |> mutate(category = "Nineties"),
-    zeros_playlist |> mutate(category = "Zeros"),
-    tens_playlist |> mutate(category = "Tens"),
-    twenties_playlist |> mutate(category = "Twenties")
-  )
+## low-level audio analysis
+All_playlist_analysis <- readRDS(file = "data/All_playlist_analysis.RDS")
 
 Arranged_playlists_analysis <- All_playlist_analysis %>%
-  arrange(playlist_name)
+  arrange(playlist_name) %>%
+  mutate(category = factor(category, levels = c(
+    "70s", "80s", "90s", "00s", "10s", "20s" )))
+
+
+
+
 
 #  One set of standard templates is below: 1–0 coding for the chord templates and the Krumhansl–Kessler key profiles.
 
@@ -238,7 +208,6 @@ Unlimited Love (2022) - The newest album.
 
 
 
-
 Music Sales {data-navmenu=Background}
 ===========================================================================
 
@@ -273,27 +242,9 @@ Column {data-width=600}
 
 ### Chart A
 
-```{r plot 1}
+```{r plot 1 Boxplot}
 
-
-Plot_Arranged_playlists <- ggplot(Arranged_playlists, aes(playlist_name, loudness, text = paste(track.name))) +
-  geom_boxplot() +
-  scale_x_discrete(limits=c("All Out 70s", "All Out 80s", "All Out 90s", "All Out 2000s", "All Out 2010s", "All Out 2020s"),
-                   labels= Playlist_labs) +
-  # Theme
-  theme_classic() +
-  theme(axis.line.x = element_blank()
-  ) +
-  # Labs
-  labs(title = "Loudness Through The Decades",
-       caption = "Source: Spotify"
-  ) +
-    
-  xlab("Playlists") +
-    
-  ylab("Relative Loudness in DB")
-
-# plotly
+Plot_Arranged_playlists <- readRDS(file = "data/Boxplot-Arranged_playlists.RDS")
 ggplotly(Plot_Arranged_playlists)
 
 ```
@@ -302,26 +253,9 @@ Column {data-width=400}
 -----------------------------------------------------------------------
 
 ### Chart B
-```{r plot 2}
+```{r plot 2 Mean_Loudness}
 
-Plot_Mean_Loudness_playlists <- ggplot(Mean_Loudness_playlists, aes(playlist_name, mean_loudness)) +
-  geom_point() +
-  scale_x_discrete(limits=c("All Out 70s", "All Out 80s", "All Out 90s", "All Out 2000s", "All Out 2010s", "All Out 2020s"),
-                   labels= Playlist_labs) +
-# Theme
-  theme_classic() +
-  theme(axis.line.x = element_blank()
-  ) +
-  # Labs
-  labs(title = "Mean Loudness Through The Decades",
-       caption = "Source: Spotify"
-  ) +
-    
-  xlab("Playlists") +
-    
-  ylab("Mean Relative Loudness in DB")
-
-# plotly
+Plot_Mean_Loudness_playlists <- readRDS(file = "data/Plot-Mean_Loudness_playlist.RDS")
 ggplotly(Plot_Mean_Loudness_playlists)
 
 ```
@@ -336,29 +270,11 @@ Energy vs Loudness {data-navmenu=Visualisation}
 =====================================================================
 
 
-```{r plot 3 energy}
+```{r plot 3 Mean_energy & Loudness}
 
-Plot_Mean_Energy_playlists <- ggplot(Mean_Energy_playlists, aes(playlist_name, mean_energy)) +
-  geom_point() +
-  scale_x_discrete(limits=c("All Out 70s", "All Out 80s", "All Out 90s", "All Out 2000s", "All Out 2010s", "All Out 2020s"),
-                   labels= Playlist_labs) +
-# Theme
-  theme_classic() +
-  theme(axis.line.x = element_blank()
-  ) +
-  # Labs
-  labs(title = "Mean Energy Through The Decades",
-       caption = "Source: Spotify"
-  ) +
-    
-  xlab("Playlists") +
-    
-  ylab("Mean Energy")
+Plot_Mean_Energy_Loudness_playlists <- readRDS(file = "data/Plot-Mean_Energy_Loudness_playlists.RDS")
+ggplotly(Plot_Mean_Energy_Loudness_playlists)
 
-# plotly
-ggplotly(Plot_Mean_Energy_playlists)
-
-#MAKE A PLOT THAT HAS BOTH MEAN LOUDNESS AND MEAN ENERGY IN A LINE PLOT Y SCALE Differnet is problem!
 
 ```
 
@@ -374,32 +290,14 @@ Column {data-width=650}
 
 ### Chromagram: Calfornication - RHCP
 
-```{r chromagram}
+```{r Chromagram}
 
 # Breakout Session 2
 
-Californication <-
-  get_tidy_audio_analysis("34KTEhpPjq6IAgQg2yzJAL?") |>
-  select(segments) |>
-  unnest(segments) |>
-  select(start, duration, pitches)
+Plot_Californication <- readRDS(file = "data/Plot-Californication.RDS")
+ggplotly(Plot_Californication)
 
-Californication |>
-  mutate(pitches = map(pitches, compmus_normalise, "chebyshev")) |>
-  compmus_gather_chroma() |> 
-  ggplot(
-    aes(
-      x = start + duration / 2,
-      width = duration,
-      y = pitch_class,
-      fill = value
-    )
-  ) +
-  geom_tile() +
-  labs(x = "Time (s)", y = NULL, fill = "Magnitude") +
-  theme_minimal() +
-  scale_fill_viridis_c()
-
+## Use Back to Black because loudness is -13,94 OF vergelijk met Suck my Kiss
 
 ```
 
@@ -417,95 +315,31 @@ I dont see any usable way of incorporating a chromagram into my corpus. If someo
 Cesptrogram {data-navmenu=Visualisation}
 ======================================================================
 
-Column 
+Column {data-width=650}
 -----------------------------------------------------------------------
+
 
 ### Cesptrogram: RHCP - Under The Bridge (1991)
 
 ```{r Cesptrogram 1}
 
-UTB <-
-  get_tidy_audio_analysis("3d9DChrdc6BOeFsbrZ3Is0") |> # Change URI.
-  compmus_align(bars, segments) |>                     # Change `bars`
-  select(bars) |>                                      #   in all three
-  unnest(bars) |>                                      #   of these lines.
-  mutate(
-    pitches =
-      map(segments,
-          compmus_summarise, pitches,
-          method = "rms", norm = "euclidean"              # Change summary & norm.
-      )
-  ) |>
-  mutate(
-    timbre =
-      map(segments,
-          compmus_summarise, timbre,
-          method = "rms", norm = "euclidean"              # Change summary & norm.
-      )
-  )
-
-UTB |>
-  compmus_gather_timbre() |>
-  ggplot(
-    aes(
-      x = start + duration / 2,
-      width = duration,
-      y = basis,
-      fill = value
-    )
-  ) +
-  geom_tile() +
-  labs(x = "Time (s)", y = NULL, fill = "Magnitude") +
-  scale_fill_viridis_c() +                              
-  theme_classic()
-
+Plot_UTB <- readRDS(file = "data/Plot-UTB.RDS")
+ggplotly(Plot_UTB)
 
 ```
 
-
-Column 
------------------------------------------------------------------------
 
 ### Cepstrogram: RHCP - Snow (2006)
 
 ``` {r Cepstrogram 2}
 
-Snow <-
-  get_tidy_audio_analysis("2aibwv5hGXSgw7Yru8IYTO") |> # Change URI.
-  compmus_align(bars, segments) |>                     # Change `bars`
-  select(bars) |>                                      #   in all three
-  unnest(bars) |>                                      #   of these lines.
-  mutate(
-    pitches =
-      map(segments,
-          compmus_summarise, pitches,
-          method = "rms", norm = "euclidean"              # Change summary & norm.
-      )
-  ) |>
-  mutate(
-    timbre =
-      map(segments,
-          compmus_summarise, timbre,
-          method = "rms", norm = "euclidean"              # Change summary & norm.
-      )
-  )
-
-Snow |>
-  compmus_gather_timbre() |>
-  ggplot(
-    aes(
-      x = start + duration / 2,
-      width = duration,
-      y = basis,
-      fill = value
-    )
-  ) +
-  geom_tile() +
-  labs(x = "Time (s)", y = NULL, fill = "Magnitude") +
-  scale_fill_viridis_c() +                              
-  theme_classic()
+Plot_Snow <- readRDS(file = "data/Plot-Snow.RDS")
+ggplotly(Plot_Snow)
 
 ```
+
+Column {data-width=350}
+-----------------------------------------------------------------------
 
 ### Notes
 
@@ -522,75 +356,34 @@ These observations perfectly align with my hypotheses.
 Standard Deviation {data-navmenu=Visualisation}
 ======================================================================
 
-Column 
+Column {data-width=650}
 -----------------------------------------------------------------------
 
-``` {r SD1}
+### Timbre SD
 
-Arranged_playlists_analysis |>
-  mutate(
-    timbre =
-      map(
-        segments,
-        compmus_summarise,
-        timbre,
-        method = "mean"
-      )
-  ) |>
-  select(category, timbre) |>
-  compmus_gather_timbre() |>
-  ggplot(aes(x = basis, y = value, fill = category)) +
-  geom_violin() +
-  scale_fill_viridis_d(labels= Playlist_labs) +   
-  labs(x = "Spotify Timbre Coefficients", y = "", fill = "Decade")
+``` {r SD A}
+
+Plot_SDA <- readRDS(file = "data/SDA.RDS")
+Plot_SDA
 
 
 ```
 
 
-Column 
------------------------------------------------------------------------
+### Weird graph SD
 
 
-``` {r SD 2}
+``` {r SD B}
 
-Arranged_playlists_analysis |>
-  mutate(
-    sections =
-      map(
-        sections,                                    # sections or segments
-        summarise_at,
-        vars(tempo, loudness, duration),             # features of interest
-        list(section_mean = mean, section_sd = sd)   # aggregation functions
-      )
-  ) |>
-  unnest(sections) |>
-  ggplot(
-    aes(
-      x = tempo,
-      y = tempo_section_sd,
-      colour = category,
-      alpha = loudness
-    )
-  ) +
-  scale_color_discrete(
-    limits=c("All Out 70s", "All Out 80s", "All Out 90s", "All Out 2000s", "All Out 2010s", "All Out 2020s"),
-    labels = Playlist_labs) +
-  geom_point(aes(size = duration / 60)) +
-  geom_rug() +
-  theme_minimal() +
-  ylim(0, 5) +
-  labs(
-    x = "Mean Tempo (bpm)",
-    y = "SD Tempo",
-    colour = "Decade",
-    size = "Duration (min)",
-    alpha = "Volume (dBFS)"
-  ) 
+Plot_SDB <- readRDS(file = "data/SDB.RDS")
+Plot_SDB
 
 ```
 
+Column {data-width=350}
+-----------------------------------------------------------------------
 
+SD text....
 
 Conclusion {data-navmenu=Conclusion}
 =======================================================================
@@ -600,7 +393,7 @@ Conclusion Research:
 Discussion {data-navmenu=Conclusion}
 =======================================================================
 
-One thing what really influences this research is the influence of remasters. For example Smooth Criminial from Michael Jackson in the playlist is an Remaster. Sadly more often than not the orignial master isn't available on spotify. So the original data is not always available for this research. Understandle enough this makes the research less of a representation than wished for.
+One thing what really influences this research is the influence of remasters. For example Smooth Criminial from Michael Jackson in the playlist is an Remaster. Sadly more often than not the orignial master isn't available on spotify. So the original data is not always available for this research. Understandebly enough this makes the research less of a representation than I wished for.
 
 Source {data-navmenu=Conclusion}
 =======================================================================

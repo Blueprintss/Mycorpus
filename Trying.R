@@ -25,19 +25,22 @@ All_playlist <-
     twenties_playlist |> mutate(category = "20s")
   )
 
+Mutated_All_playlist <- All_playlist %>%
+  mutate(playlist_name = "Other")
+  
+Complete_playlist <-  
+  bind_rows(Mutated_All_playlist, RHCP_Songs |> mutate(category = "RHCP")) %>%
+  filter(loudness > -18)
 
-Arranged_playlists <- All_playlist %>%
-  filter(loudness > -18) %>%
-  summarise(playlist_name)
 
 Ar <-factor(All_playlist, levels = c("70s", "80s", "90s", "00s", "10s", "20s"))
   
 
-Mean_Loudness_playlists <- Arranged_playlists %>%
+Mean_Loudness_playlists <- Complete_playlist %>%
   group_by(playlist_name) %>%
   summarise(mean_loudness = mean(loudness))
 
-Mean_Energy_playlists <- Arranged_playlists %>%
+Mean_Energy_playlists <- Complete_playlist %>%
   group_by(playlist_name) %>%
   summarise(mean_energy = mean(energy))
 
@@ -47,7 +50,7 @@ Arranged_Album_RHCP_Songs <- RHCP_Songs %>%
   arrange(track.album.release_date)
 
 
-Plot_Arranged_playlists <- ggplot(Arranged_playlists, aes(Ar, loudness, text = paste(track.name))) +
+Plot_Arranged_playlists <- ggplot(Arranged_playlists, aes(track.album.release_date, loudness, text = paste(track.name))) +
   geom_boxplot() +
   scale_x_discrete(labels= PLaylist_labs) +
   # Theme
@@ -71,7 +74,7 @@ ggplotly(Plot_Arranged_playlists)
   
   ### Chart B
 
-Plot_Mean_Loudness_playlists <- ggplot(Mean_Loudness_playlists, aes(playlist_name, mean_loudness)) +
+Plot_Mean_Loudness_playlists <- ggplot(Mean_Loudness_playlists, aes(playlist_name, loudness)) +
   geom_point() +
   scale_x_discrete(labels= PLaylist_labs) +
   # Theme
@@ -87,3 +90,12 @@ Plot_Mean_Loudness_playlists <- ggplot(Mean_Loudness_playlists, aes(playlist_nam
   
   ylab("Mean Relative Loudness in DB")
 
+
+### Chart C
+
+ggplot(Complete_playlist, aes(track.album.release_date, loudness, color = playlist_name)) +
+  geom_point() +
+  stat_summary(
+    geom = "point",
+    fun = "mean",
+  )

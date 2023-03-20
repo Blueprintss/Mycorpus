@@ -17,7 +17,8 @@ Arranged_Album_RHCP_Songs <- RHCP_Songs %>%
 
   
 ggplot(Arranged_Album_RHCP_Songs, aes(track.album.release_date, mean_loudness_rhcp)) +
-         geom_point()
-      
+      geom_point()
+  
 # Idee: plot mean rhcp samen met all out playlists.
+# Outlier: 2022 after april
        
