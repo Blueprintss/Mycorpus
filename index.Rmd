@@ -227,7 +227,7 @@ Column {data-width=500}
 
 ### Notes
 
-As seen in the graph spotify started to take off in the end of the 00s. At the same time we see a massive decline in Sales for CD's. This suggest a correlation. I get back on this in the conclusion.
+As seen in the graph i made spotify started to take off in the end of the 00s. At the same time we see a massive decline in Sales for CD's. This suggest a correlation. I get back on this in the conclusion.
 
 
 
