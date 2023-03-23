@@ -16,6 +16,7 @@ library(ggplot2)
 library(tufte)
 library(plotly)
 library(compmus)
+library(bslib)
 
 ## 70s-20s
 All_playlist <- readRDS(file = "data/All_playlist.RDS")
@@ -323,8 +324,8 @@ Column {data-width=650}
 
 ```{r Cesptrogram 1}
 
-Plot_UTB <- readRDS(file = "data/Plot-UTB.RDS")
-ggplotly(Plot_UTB)
+Plot_UTB <- readRDS(file = "data/Plot-UTB.RDS") ## Add track newest album, add ggplotly
+Plot_UTB
 
 ```
 
@@ -333,8 +334,8 @@ ggplotly(Plot_UTB)
 
 ``` {r Cepstrogram 2}
 
-Plot_Snow <- readRDS(file = "data/Plot-Snow.RDS")
-ggplotly(Plot_Snow)
+Plot_Snow <- readRDS(file = "data/Plot-Snow.RDS") ## Add track newest album, add ggplotly
+Plot_Snow
 
 ```
 
@@ -359,31 +360,116 @@ Standard Deviation {data-navmenu=Visualisation}
 Column {data-width=650}
 -----------------------------------------------------------------------
 
-### Timbre SD
+
+### Timbre Graph
 
 ``` {r SD A}
 
 Plot_SDA <- readRDS(file = "data/SDA.RDS")
-Plot_SDA
+ggplotly(Plot_SDA)
 
 
 ```
 
 
-### Weird graph SD
+Column {data-width=350}
+-----------------------------------------------------------------------
+
+### Notes
+
+So what we see here on the x-axis are the timbre coeffiecients. (c01-c12)
+I mainly want to focus c01 here. This represents the loudness.
+
+Please zoom in so its better to follow, 
+you can clearly see that the 00s have a much smaller range that the other decades.
+With a bit of imagination you can see the same features as seen by the boxplot by the Main charts.
 
 
-``` {r SD B}
 
-Plot_SDB <- readRDS(file = "data/SDB.RDS")
-Plot_SDB
+Temporal Feautures {data-navmenu=Visualisation}
+======================================================================
+
+Column {data-width=650}
+-----------------------------------------------------------------------
+
+
+### UTB
+
+```{r Tempo UTB}
+
+Tempo_UTB2 <- readRDS(file = "data/Tempo_UTB2.RDS") ## Add track newest album
+ggplotly(Tempo_UTB2)
+
+```
+
+
+### Snow
+
+
+```{r Tempo Snow}
+
+Tempo_Snow2 <- readRDS(file = "data/Tempo_Snow2.RDS") ## Add track newest album
+ggplotly(Tempo_Snow2)
 
 ```
 
 Column {data-width=350}
 -----------------------------------------------------------------------
 
-SD text....
+### Notes
+This graphs shows the relative loudness changes, to each point in time. For my corpus its interesting to see that the novelty peaks from UTB have a higher max, which is probably due to the higher dynamic range of this song.
+
+
+
+
+
+
+
+Clustering {data-navmenu=Visualisation}
+======================================================================
+
+Column {data-width=650} {.tabset}
+-----------------------------------------------------------------------
+
+### Clustertree
+
+```{r Clustertree}
+
+Clustering_tree <- readRDS(file = "data/Clustertree.RDS") ## Cluster same average,complete?
+ggplotly(Clustering_tree)
+
+```
+
+
+### Heatmap
+
+```{r Cluster heatmap}
+
+Clustering_heat <- readRDS(file = "data/Clusterfile.RDS")  ## Cluster same average,complete?
+Clustering_heat
+
+```
+
+
+
+
+Column {data-width=350}
+-----------------------------------------------------------------------
+
+### Notes
+
+What your seeing here on your left is called a clustering tree.
+I made a cluster tree based on the loudness, energy and valence.
+
+What this means is that Songs that are clusterd together should have be in a simialiar range based on loudness, energy and valence. 
+
+For example if we zoom in we can see a cluster of Californication-Highway to Hell
+If we look at the Heatmap and search the same cluster we can see a monogamy on the colours, which means their values are close to each other. So is their a sub cluster of Calfornication and Sweater Weather, if you hover over there values you can see they are awfully close on all Energy, valence and Loudness.
+
+Now if we think of the corpus again. Californacation is form the 00s and Sweather Weather from the 10s. So it reasonble to think that they could be mixed evenly loud.
+
+
+
 
 Conclusion {data-navmenu=Conclusion}
 =======================================================================

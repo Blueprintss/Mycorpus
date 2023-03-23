@@ -46,5 +46,7 @@ SDB <- Arranged_playlists_analysis |>
     alpha = "Volume (dBFS)"
   ) 
 
+SDB
+
 saveRDS(object = SDB,file = "data/SDB.RDS")
 
