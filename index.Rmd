@@ -1,5 +1,6 @@
 ---
 title: "Loundness War Over?"
+author: "by Joël Buijnsters"
 output: 
   flexdashboard::flex_dashboard:
     orientation: columns
@@ -147,12 +148,6 @@ key_templates <-
 
 ```
 
-Homework
-======================================================================
-
-**See Visualisation -> Clustering**
-
-
 
 
 Introduction
@@ -160,7 +155,7 @@ Introduction
 
 ### Introduction to My Corpus
 
-My Corpus is about the Loudness War, by using big data I'm wondering if the loudness from tracks really peaked during the Loudnesswar and if with the normalization tools from streaming services nowadays, the loudness from songs decreases again. I choose this, because i really hated the loudness war since my ear fatiqued way sooner and music was just flat. I really hope to find some proof that nowadays the loudnass war is finally ending.
+My Corpus is about the Loudness War, by using big data I'm wondering if the loudness from tracks really peaked during the Loudness War and if with the normalization tools from streaming services nowadays, the loudness from songs decreases again. I choose this, because i really hated the loudness war since my ear fatiqued way sooner and music was just flat. I really hope to find some proof that nowadays the loudnass war is finally ending.
 				
 My comparison points are from the Loudness factor of the spotify database, In which i will compare the output of the different decennia with the development of the loudness war.
 				The representation is only limited by the amount of data it covers, since im not able to track all the music in the world i will pick the All out Playlist from the 70-10s to make my case. 
@@ -180,10 +175,10 @@ The goal of the Loudness War is to make a song stand out on the radio or in a pl
 
 While loudness can be effective in some contexts, such as in rock or electronic music, it can also detract from the emotional impact of a song, and make it sound more monotonous or tiresome over time. As a result, many music professionals and fans advocate for a return to more natural, dynamic sound production, and for musicians to prioritize the quality and impact of their music over sheer volume.
 
+
 Red Hot Chili Peppers {data-navmenu=Background}
 ===========================================================================
 
-## Red Hot Chili Peppers
 
 The Red Hot Chili Peppers (RHCP) are an American rock band formed in Los Angeles, California, in 1983. 
 HCP's style combines elements of funk, punk, and rock music,
@@ -195,36 +190,47 @@ The Red Hot Chili Peppers have released a total of 11 studio albums, several liv
 The Red Hot Chili Peppers (1984) - This is the band's debut album, featuring a more punk rock sound and an early lineup that included founding members Anthony Kiedis, Flea, Hillel Slovak, and Jack Irons.
 
 Freaky Styley (1985) - This album saw the band exploring more funk and soul influences, with George Clinton producing.
+
 The Uplift Mofo Party Plan (1987) - This album marked the return of guitarist Hillel Slovak and drummer Jack Irons to the band, and is considered one of their most energetic and raw releases.
+
 Mother's Milk (1989) - This album marked a major breakthrough for the band, with the hits "Higher Ground" and "Knock Me Down" gaining them mainstream attention.
+
 Blood Sugar Sex Magik (1991) - This album is considered a masterpiece by many, featuring the hit singles "Give It Away," "Under the Bridge," and "Suck My Kiss." It remains one of the band's most successful and beloved releases.
+
 One Hot Minute (1995) - This album marked the departure of guitarist John Frusciante, and the arrival of new guitarist Dave Navarro. The album saw the band experimenting with more psychedelic and heavy rock sounds.
+
 Californication (1999) - This album marked the return of John Frusciante to the band, and saw them returning to a more melodic and accessible sound. The title track and "Scar Tissue" became massive hits.
+
 By the Way (2002) - This album continued in the vein of Californication, with a more polished and pop-oriented sound. Hits included "By the Way" and "Can't Stop."
+
 Stadium Arcadium (2006) - This double album is one of the band's most ambitious releases, featuring a diverse range of styles and sounds. It won the band multiple Grammy Awards, including Best Rock Album.
+
 I'm with You (2011) - This album marked the departure of guitarist John Frusciante, and the arrival of new guitarist Josh Klinghoffer. The album saw the band experimenting with more electronic and atmospheric sounds.
+
 The Getaway (2016) - This album marked the return of producer Danger Mouse, and saw the band continuing to explore new sounds and styles. The title track and "Dark Necessities" were popular singles.
-Unlimited Love (2022) - The newest album.
+
+Unlimited Love (2022) - The album has a little bit more indie influeced. Black summer toped in Indie hitlist
+
+Return of the Dream Canteen (2022) - Newest album
 
 
 
-
-Music Sales {data-navmenu=Background}
+Music Sales {data-navmenu=Background} 
 ===========================================================================
 
-## Growth Spotify
-
-Column {data-width=500}
+Column {data-width=650} {.tabset}
 -----------------------------------------------------------------------
 
-![Growth Spotify](https://www.businessofapps.com/wp-content/uploads/2018/11/Spotify-user-growth-and-features.png)
+### Growth Spotify
 
+![Source: Spotify Announcements](https://www.businessofapps.com/wp-content/uploads/2018/11/Spotify-user-growth-and-features.png)
 
-Column {data-width=500}
+### Sales CD
+
+![Source: RIAA](https://i.pinimg.com/originals/26/39/2e/26392e02222893393165324e0ab3ed0c.jpg)
+
+Column {data-width=350} 
 -----------------------------------------------------------------------
-
-![Sales CD](https://i.pinimg.com/originals/26/39/2e/26392e02222893393165324e0ab3ed0c.jpg)
-
 
 ### Notes
 
@@ -233,12 +239,10 @@ As seen in the graph i made spotify started to take off in the end of the 00s. A
 
 
 
-
-
-Main charts {data-navmenu=Visualisation}
+Main Loudness Chart {data-navmenu=Visualisation}
 ======================================================================
 
-Column {data-width=600}
+Column {data-width=650}
 -----------------------------------------------------------------------
 
 ### Chart A
@@ -250,10 +254,22 @@ ggplotly(Plot_Arranged_playlists)
 
 ```
 
-Column {data-width=400}
+Column {data-width=350}
 -----------------------------------------------------------------------
 
-### Chart B
+### Notes
+
+Charts are hopefuly selfexplanitory otherwise i will write something here
+
+
+RHCP & Loudness {data-navmenu=Visualisation}
+======================================================================
+
+Column {data-width=650}
+-----------------------------------------------------------------------
+
+### Mean Loudness
+
 ```{r plot 2 Mean_Loudness}
 
 Plot_Mean_Loudness_playlists <- readRDS(file = "data/Plot-Mean_Loudness_playlist.RDS")
@@ -261,15 +277,34 @@ ggplotly(Plot_Mean_Loudness_playlists)
 
 ```
 
+### Mean RHCP 
 
-### Extra explanition plots
 
-Charts are hopefuly selfexplanitory otherwise i will write something here
+```{r plot 3 Mean_Loudness RHCP}
+
+Plot_RHCP <- readRDS(file = "data/RHCP_Plot.RDS")
+ggplotly(Plot_RHCP)
+
+```
+
+Column {data-width=350}
+-----------------------------------------------------------------------
+
+### Notes
+
+Here we can compare the mean of the decades with the albums RHCP put out. What we can learn is that RHCP have a much higher loudness since when they started compared to the mean of the decades. Until the 10s then they stated to confirm to the mean loudness. 
+
+What really stand out is the album out 1991. Which is oddly enough one of their best recieved albums, so without competing in the loudnesswar they still recieved lots of praise for this album.
+
 
 
 Energy vs Loudness {data-navmenu=Visualisation}
 =====================================================================
 
+Column {data-width=650}
+-----------------------------------------------------------------------
+
+### Plot
 
 ```{r plot 3 Mean_energy & Loudness}
 
@@ -280,43 +315,18 @@ ggplotly(Plot_Mean_Energy_Loudness_playlists)
 ```
 
 
-
-
-Chromagram {data-navmenu=Visualisation}
-======================================================================
-
-
-Column {data-width=650}
------------------------------------------------------------------------
-
-### Chromagram: Calfornication - RHCP
-
-```{r Chromagram}
-
-# Breakout Session 2
-
-Plot_Californication <- readRDS(file = "data/Plot-Californication.RDS")
-ggplotly(Plot_Californication)
-
-## Use Back to Black because loudness is -13,94 OF vergelijk met Suck my Kiss
-
-```
-
 Column {data-width=350}
 -----------------------------------------------------------------------
 
 ### Notes
 
-I dont see any usable way of incorporating a chromagram into my corpus. If someone has a suggestion I would love to hear it. Thanks in advance.
-
-
-
+asdfasdf
 
 
 Cesptrogram {data-navmenu=Visualisation}
 ======================================================================
 
-Column {data-width=650}
+Column {data-width=650} {.tabset}
 -----------------------------------------------------------------------
 
 
@@ -428,29 +438,17 @@ This graphs shows the relative loudness changes, to each point in time. For my c
 Clustering {data-navmenu=Visualisation}
 ======================================================================
 
-Column {data-width=650} {.tabset}
+Column {data-width=650}
 -----------------------------------------------------------------------
 
 ### Clustertree
 
 ```{r Clustertree}
 
-Clustering_tree <- readRDS(file = "data/Clustertree.RDS") ## Cluster same average,complete?
-ggplotly(Clustering_tree)
+Clustering_Colour <- readRDS(file = "data/Cluster_Colour.RDS") ## Clustered average
+Clustering_Colour
 
 ```
-
-
-### Heatmap
-
-```{r Cluster heatmap}
-
-Clustering_heat <- readRDS(file = "data/Clusterfile.RDS")  ## Cluster same average,complete?
-Clustering_heat
-
-```
-
-
 
 
 Column {data-width=350}
@@ -459,16 +457,13 @@ Column {data-width=350}
 ### Notes
 
 What your seeing here on your left is called a clustering tree.
-I made a cluster tree based on the loudness, energy and valence.
+I made a cluster tree purely based on loudness
 
-What this means is that Songs that are clusterd together should have be in a simialiar range based on loudness, energy and valence. 
+What this means is that Songs that are clustered together should have be in a simalair range based on loudness
 
-For example if we zoom in we can see a cluster of Californication-Highway to Hell
-If we look at the Heatmap and search the same cluster we can see a monogamy on the colours, which means their values are close to each other. So is their a sub cluster of Calfornication and Sweater Weather, if you hover over there values you can see they are awfully close on all Energy, valence and Loudness.
+Our corpus suggest that if we cluster this way we should see that tracks form each decade should roughly be clustered togehter. On first look that's not exactly the case. But since we know work with individual tracks instead of means, this is possible.
 
-Now if we think of the corpus again. Californacation is form the 00s and Sweather Weather from the 10s. So it reasonble to think that they could be mixed evenly loud.
-
-
+If we dive a little deeper we can see something interesting. If we just look at the two biggest clusters. We can see that the top one hardly has any tracks from the 00s and that most of the tracks form the 70s ands 80s are represented in this cluster. This shows that the loudness levels from the tracks in the 70s and 80s really diver from most tracks in the 00s.
 
 
 Conclusion {data-navmenu=Conclusion}
@@ -481,9 +476,7 @@ Discussion {data-navmenu=Conclusion}
 
 One thing what really influences this research is the influence of remasters. For example Smooth Criminial from Michael Jackson in the playlist is an Remaster. Sadly more often than not the orignial master isn't available on spotify. So the original data is not always available for this research. Understandebly enough this makes the research less of a representation than I wished for.
 
+
+
 Source {data-navmenu=Conclusion}
 =======================================================================
-
-Spotify playlists used:
-
-

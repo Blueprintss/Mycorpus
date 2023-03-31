@@ -21,8 +21,8 @@ Mean_Loudness_playlists <- Arranged_playlists %>%
 
 Plot_Mean_Loudness_playlists <- ggplot(Mean_Loudness_playlists, aes(category, mean_loudness)) +
   geom_point() +
-  
-  # Theme
+
+# Theme
   theme_classic() +
   theme(axis.line.x = element_blank()
   ) +
@@ -34,7 +34,6 @@ Plot_Mean_Loudness_playlists <- ggplot(Mean_Loudness_playlists, aes(category, me
   xlab("Decade") +
   
   ylab("Mean Relative Loudness (dBFS)")
-
 
 
 saveRDS(object = Plot_Mean_Loudness_playlists,file = "data/Plot-Mean_Loudness_playlist.RDS")

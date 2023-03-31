@@ -8,7 +8,7 @@ library(compmus)
 
 seventies_playlist <- get_playlist_audio_features("", "37i9dQZF1DWTJ7xPn4vNaz?")
 eighties_playlist <- get_playlist_audio_features("", "37i9dQZF1DX4UtSsGT1Sbe?")
-nineties_playlist <- get_playlist_audio_features("", "37i9dQZF1DXbTxeAdrVG2l")
+nineties_playlist <- get_playlist_audio_features("", "37i9dQZF1DXbTxeAdrVG2l?")
 zeros_playlist <- get_playlist_audio_features("", "37i9dQZF1DX4o1oenSJRJd?")
 tens_playlist <- get_playlist_audio_features("", "37i9dQZF1DX5Ejj0EkURtP?")
 twenties_playlist <- get_playlist_audio_features("", "4vSTV61efRmetmaoz95Vet?")

@@ -54,9 +54,7 @@ All_Analysis |>
 Seventies_juice <-
   recipe(
     track.name ~
-      energy +
-      loudness +
-      valence,
+      loudness,
     data = All_Analysis
   ) |>
   step_center(all_predictors()) |>
@@ -70,9 +68,10 @@ Seventies_juice <-
 All_dist <- dist(Seventies_juice, method = "euclidean")
 
 Clustering_tree <- All_dist |> 
-  hclust(method = "average") |> # Try single, average, and complete.
+  hclust(method = "complete") |> # Try single, average, and complete.
   dendro_data() |>
   ggdendrogram()
 
+ggplotly(Clustering_tree)
 
 saveRDS(object = Clustering_tree,file = "data/Clustertree.RDS")
