@@ -29,13 +29,13 @@ Plot_Mean_Energy_Loudness_playlists <- ggplot(Mean_Energy_Loudness_playlists, ae
   ) +
   # Labs
   labs(title = "Mean Energy Through The Decades",
-       caption = "Source: Spotify"
+       caption = "Source: Spotify",
+       size = "Mean Loudness"
   ) +
   
   xlab("Playlists") +
   
   ylab("Mean Energy")
-
 
 
 saveRDS(object = Plot_Mean_Energy_Loudness_playlists,file = "data/Plot-Mean_Energy_Loudness_playlists.RDS")

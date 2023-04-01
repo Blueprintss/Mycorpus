@@ -155,25 +155,16 @@ Introduction
 
 ### Introduction to My Corpus
 
-My Corpus is about the Loudness War, by using big data I'm wondering if the loudness from tracks really peaked during the Loudness War and if with the normalization tools from streaming services nowadays, the loudness from songs decreases again. I choose this, because i really hated the loudness war since my ear fatiqued way sooner and music was just flat. I really hope to find some proof that nowadays the loudnass war is finally ending.
+
+The [Loundess War](https://en.wikipedia.org/wiki/Loudness_war) refers to a trend in music production since the 80s where songs are made as loud as possible, often at the expense of dynamic range, sound quality and listerener fatique. The goal of the Loudness War is to make a song stand out on the radio or in a CD-player, where louder songs are more likely to catch the listener's attention.
+
+My expectation is that the relative loudness wil decline at the same time that streaming services started to gain a lot of clients. Since all the streaming services use normalization (every song is equally loud), their isn't any beneficial factor left for making a song sheer loud. I suspect producers will focus again on quality and impact.
 				
-My comparison points are from the Loudness factor of the spotify database, In which i will compare the output of the different decennia with the development of the loudness war.
-				The representation is only limited by the amount of data it covers, since im not able to track all the music in the world i will pick the All out Playlist from the 70-10s to make my case. 
+By looking at data from Spotify i will be searching for evidence of the existence of the Loudness War and if the decline of the Loudness corresponds with the fall of the CD Sales and the rise of steaming services during the 00s and 10s. (**See: Background -> Music Sales**)
 
-My expectation is that the relative loudness wil decline at the same time that streaming services started to gain a lot of members. Since all the streaming services use normalization (every song is equally loud), and with that their isn't any beneficial factor left for making a song sheer loud. I suspect producers will focus again on quality and impact.
+At the same time i will look at the music of one of my favorite bands The Red Hot Chili Peppers, since they have produced albums since the 80s, I would be interesting to see if they have followed the Loudness War trend.
 
-At the same time i will look at the music of my favorite band The Red Hot Chili Peppers, since they have produced albums since the 80s, I would be interesting to see if they have followed the Loudness trend.
-
-
-Loudness War {data-navmenu=Background}
-===========================================================================
-
-
-The Loudness War refers to a trend in music production where songs are made as loud as possible, often at the expense of dynamic range and sound quality. This is achieved through the use of various compression and limiting techniques that increase the volume of a recording, which can make it sound more aggressive and powerful.
-
-The goal of the Loudness War is to make a song stand out on the radio or in a playlist, where louder songs are more likely to catch the listener's attention. However, this pursuit of loudness has led to the overuse of these techniques, which can result in distortion, loss of detail, and listener fatigue.
-
-While loudness can be effective in some contexts, such as in rock or electronic music, it can also detract from the emotional impact of a song, and make it sound more monotonous or tiresome over time. As a result, many music professionals and fans advocate for a return to more natural, dynamic sound production, and for musicians to prioritize the quality and impact of their music over sheer volume.
+If you want some music to listen too during reading please go to (**Conclusion -> Source**) 
 
 
 Red Hot Chili Peppers {data-navmenu=Background}
@@ -181,7 +172,7 @@ Red Hot Chili Peppers {data-navmenu=Background}
 
 
 The Red Hot Chili Peppers (RHCP) are an American rock band formed in Los Angeles, California, in 1983. 
-HCP's style combines elements of funk, punk, and rock music,
+RHCP's style combines elements of funk, punk, and rock music,
 RHCP's music often deals with themes of love, sexuality, and California culture
 The band has sold over 80 million records worldwide, making them one of the best-selling bands of all time.
 
@@ -234,7 +225,9 @@ Column {data-width=350}
 
 ### Notes
 
-As seen in the graph i made spotify started to take off in the end of the 00s. At the same time we see a massive decline in Sales for CD's. This suggest a correlation. I get back on this in the conclusion.
+As seen in the graphs Spotify started to take off in the end of the 00s. 
+At the same time we see a massive decline in Sales for CD's. 
+This suggest a correlation. I get back on this in the conclusion.
 
 
 
@@ -259,7 +252,9 @@ Column {data-width=350}
 
 ### Notes
 
-Charts are hopefuly selfexplanitory otherwise i will write something here
+Here you see a boxplot (You can hover over the graph for more information).
+
+What I want you to understand is that we can see a clear rise in Loudness since the 70s up until the 00s after that it declines. This perfeclty aligns with my expecation from the introduction.
 
 
 RHCP & Loudness {data-navmenu=Visualisation}
@@ -292,13 +287,13 @@ Column {data-width=350}
 
 ### Notes
 
-Here we can compare the mean of the decades with the albums RHCP put out. What we can learn is that RHCP have a much higher loudness since when they started compared to the mean of the decades. Until the 10s then they stated to confirm to the mean loudness. 
+Here you can compare the mean of the decades with the albums RHCP put out. What we can learn is that RHCP have a much higher loudness since when they started compared to the mean of the decades. Until the 10s then they stated to confirm to the mean loudness. Beware that the y-axis's don't have the same scale.
 
-What really stand out is the album out 1991. Which is oddly enough one of their best recieved albums, so without competing in the loudnesswar they still recieved lots of praise for this album.
+What really stands out is the album from 1991. Which is oddly enough one of their best received albums, so without competing in the loudness war they still received lots of praise for this album.
 
 
 
-Energy vs Loudness {data-navmenu=Visualisation}
+Energy & Loudness {data-navmenu=Visualisation}
 =====================================================================
 
 Column {data-width=650}
@@ -309,7 +304,7 @@ Column {data-width=650}
 ```{r plot 3 Mean_energy & Loudness}
 
 Plot_Mean_Energy_Loudness_playlists <- readRDS(file = "data/Plot-Mean_Energy_Loudness_playlists.RDS")
-ggplotly(Plot_Mean_Energy_Loudness_playlists)
+Plot_Mean_Energy_Loudness_playlists
 
 
 ```
@@ -320,19 +315,22 @@ Column {data-width=350}
 
 ### Notes
 
-asdfasdf
+Spotify uses a feature called Energy, which is based on dynamic range, perceived loudness, timbre, onset rate, and general entropy. Since I work with Loudness I thought it would be interesting to see how much loudness and energy would overlap.
+
+What i found interesting was the fact that while the energy clearly declined during the 10s and 20s the loudness declined only slowly.
 
 
-Cesptrogram {data-navmenu=Visualisation}
+
+Cepstrograms {data-navmenu=Visualisation}
 ======================================================================
 
 Column {data-width=650} {.tabset}
 -----------------------------------------------------------------------
 
 
-### Cesptrogram: RHCP - Under The Bridge (1991)
+### Cepstrogram: RHCP - Under The Bridge (1991)
 
-```{r Cesptrogram 1}
+```{r Cepstrogram 1}
 
 Plot_UTB <- readRDS(file = "data/Plot-UTB.RDS") ## Add track newest album, add ggplotly
 Plot_UTB
@@ -354,13 +352,16 @@ Column {data-width=350}
 
 ### Notes
 
-I choose to make 2 cepstrograms, since my corpus is so loudness based the c01 (loudness factor) is the obivious most interseting factor to focus on here. As explained in the background the loudnesswar has an influence on the dynamic range. This is very good visible in these examples :
+Spotifiy data works with timbre coefficients (c01-c12)
+For this corpus its only necessary to understand that c01 represents the loudness coefficient 
 
-The song Snow from 2006 has a lot of homogenity in the c01 factor which respresents the same loudness trough the entire song, apart form the intro en end..
+I choose to make 2 cepstrograms, The c01 coefficient is obvious the most interesting factor to focus on here. As explained in the introduction the loudness war has an influence on the dynamic range. This is very good visible in these examples :
 
-On the other hand the song Under The Bridge from 1991 is very different. The c01 from this graph is obviously more different throughout the entire song, which snow a lot of dynamic range thourgh the entire song.
+The song Snow from 2006 has a lot of homogenity in the c01 factor which represents the same loudness trough the entire song, apart form the intro and outro.
 
-These observations perfectly align with my hypotheses.
+On the other hand the song Under The Bridge from 1991 is very different. The c01 from this graph is obviously more different throughout the entire song, which snow a lot of dynamic range through the entire song.
+
+These observations perfectly align with my expectation.
 
 
 
@@ -371,7 +372,7 @@ Column {data-width=650}
 -----------------------------------------------------------------------
 
 
-### Timbre Graph
+### Timbre Plot
 
 ``` {r SD A}
 
@@ -391,19 +392,19 @@ So what we see here on the x-axis are the timbre coeffiecients. (c01-c12)
 I mainly want to focus c01 here. This represents the loudness.
 
 Please zoom in so its better to follow, 
-you can clearly see that the 00s have a much smaller range that the other decades.
-With a bit of imagination you can see the same features as seen by the boxplot by the Main charts.
+you can clearly see that the 00s have a much smaller range than the other decades.
+With a bit of imagination you can see the same features as seen by the Boxplot by the Main charts.
 
 
 
-Temporal Feautures {data-navmenu=Visualisation}
+Temporal Features {data-navmenu=Visualisation}
 ======================================================================
 
 Column {data-width=650}
 -----------------------------------------------------------------------
 
 
-### UTB
+### Tempogram: RHCP - Under The Bridge (1991)
 
 ```{r Tempo UTB}
 
@@ -413,7 +414,7 @@ ggplotly(Tempo_UTB2)
 ```
 
 
-### Snow
+### Tempogram: RHCP - Snow (2006)
 
 
 ```{r Tempo Snow}
@@ -427,12 +428,8 @@ Column {data-width=350}
 -----------------------------------------------------------------------
 
 ### Notes
-This graphs shows the relative loudness changes, to each point in time. For my corpus its interesting to see that the novelty peaks from UTB have a higher max, which is probably due to the higher dynamic range of this song.
 
-
-
-
-
+This graphs shows the relative loudness changes, to each point in time. For my corpus it's interesting to see that the novelty peaks from Under The Bridge have a higher max, which is probably due to the higher dynamic range of this song.
 
 
 Clustering {data-navmenu=Visualisation}
@@ -457,26 +454,80 @@ Column {data-width=350}
 ### Notes
 
 What your seeing here on your left is called a clustering tree.
-I made a cluster tree purely based on loudness
+I made a cluster tree purely based on loudness.
 
-What this means is that Songs that are clustered together should have be in a simalair range based on loudness
+What this means is that songs that are clustered together should be in a similar range based on loudness.
 
-Our corpus suggest that if we cluster this way we should see that tracks form each decade should roughly be clustered togehter. On first look that's not exactly the case. But since we know work with individual tracks instead of means, this is possible.
+This corpus suggest that if I cluster this way I should see that tracks form each decade should roughly be clustered together. On first look that's not exactly the case. But since I know work here with individual tracks instead of means, this is possible.
 
-If we dive a little deeper we can see something interesting. If we just look at the two biggest clusters. We can see that the top one hardly has any tracks from the 00s and that most of the tracks form the 70s ands 80s are represented in this cluster. This shows that the loudness levels from the tracks in the 70s and 80s really diver from most tracks in the 00s.
+If I dive a little deeper I can see something interesting. Lets just look at the the two biggest clusters. You can see that the top one hardly has any tracks from the 00s and that most of the tracks form the 70s and 80s are represented in this cluster. This shows that the loudness levels from the tracks in the 70s and 80s really diver from most tracks in the 00s.
 
 
 Conclusion {data-navmenu=Conclusion}
 =======================================================================
 
-Conclusion Research:
+I think the results are clear enough to say that their indeed was a Loundess War that took place since the 80s until the 00. Then at the same time Streaming services started to take off, Loundess did really decrease. This is prove that their is correlation between the rise of streaming services and the decline of loudness. Which for us as consumers of music is in my opinion a good thing. 
+
+However as I mentioned by the energy graph, The energy did not so much decline since the 10s as the loudness did. This really begs the question what kind of production methods music producers use to gain the same amount of energy impact on listeners as they did before with sheer loudness. This would be a really great follow up research.
+
+**So is the Loudness war really over?** 
+
+Yes if we look at sheer loudness levels, however I think the war moved to another domain. Mainly to music production skills for streaming services. Since normalezation is the standard there, it leveled the playing field on sheer loudness, but not on perceived loudness.
+
+
 
 Discussion {data-navmenu=Conclusion}
 =======================================================================
 
-One thing what really influences this research is the influence of remasters. For example Smooth Criminial from Michael Jackson in the playlist is an Remaster. Sadly more often than not the orignial master isn't available on spotify. So the original data is not always available for this research. Understandebly enough this makes the research less of a representation than I wished for.
+While I stand for my conlclusion this reasearch is limited any in an ideal world would not be affected by the following points:
 
+One thing what really affect this research is the influence of remasters. For example Smooth Criminial from Michael Jackson in the playlist I used is an Remaster. Sadly more often than not the original master isn't available on Spotify. So the original data is not always available for this research, this makes the research less of a representation than I wished for.
+
+Also the representation is severly limited by the amount of data it covers, since I was not able to track all the music in the world i have picked the All out Playlist from the 70-20s to make my case. It's of course imaginable that with much more data the results of this research would have been different.
 
 
 Source {data-navmenu=Conclusion}
 =======================================================================
+  
+Spotify playlists used:
+  
+Column {data-width=650} {.tabset}
+-----------------------------------------------------------------------
+  
+### 70s
+
+<iframe src="https://open.spotify.com/embed/playlist/37i9dQZF1DWTJ7xPn4vNaz?utm_source=generator" width="100%" height="100%" frameBorder="0" allowtransparency="true" allow="encrypted-media" data-external="1"></iframe>
+    
+### 80s
+
+<iframe src="https://open.spotify.com/embed/playlist/37i9dQZF1DX4UtSsGT1Sbe?utm_source=generator" width="100%" height="100%" frameBorder="0" allowtransparency="true" allow="encrypted-media" data-external="1"></iframe>
+      
+### 90s
+
+<iframe src="https://open.spotify.com/embed/playlist/37i9dQZF1DXbTxeAdrVG2l?utm_source=generator" width="100%" height="100%" frameBorder="0" allowtransparency="true" allow="encrypted-media" data-external="1"></iframe>
+        
+### 00s
+
+<iframe src="https://open.spotify.com/embed/playlist/37i9dQZF1DX4o1oenSJRJd?utm_source=generator" width="100%" height="100%" frameBorder="0" allowtransparency="true" allow="encrypted-media" data-external="1"></iframe>
+
+          
+### 10s
+
+<iframe src="https://open.spotify.com/embed/playlist/37i9dQZF1DX5Ejj0EkURtP?utm_source=generator" width="100%" height="100%" frameBorder="0" allowtransparency="true" allow="encrypted-media" data-external="1"></iframe>
+     
+            
+### 20s
+
+<iframe src="https://open.spotify.com/embed/playlist/4vSTV61efRmetmaoz95Vet?utm_source=generator" width="100%" height="100%" frameBorder="0" allowtransparency="true" allow="encrypted-media" data-external="1"></iframe>
+              
+### RHCP
+
+<iframe src="https://open.spotify.com/embed/playlist/761qISmudNnnQ99BvnU4wo?utm_source=generator" width="100%" height="100%" frameBorder="0" allowtransparency="true" allow="encrypted-media" data-external="1"></iframe>
+                
+                
+Column {data-width=350}
+-----------------------------------------------------------------------
+                
+### Notes
+                
+Please enjoy while reading this corpus, or under the shower. If you're smart you will first look at the Main Chart so you will see which playlist shouldn't tire your ears.
