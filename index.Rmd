@@ -1,5 +1,5 @@
 ---
-title: "Loundness War Over?"
+title: "Loudness War Over?"
 author: "by Joël Buijnsters"
 output: 
   flexdashboard::flex_dashboard:
