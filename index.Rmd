@@ -164,7 +164,7 @@ By looking at data from Spotify i will be searching for evidence of the existenc
 
 At the same time i will look at the music of one of my favorite bands The Red Hot Chili Peppers, since they have produced albums since the 80s, I would be interesting to see if they have followed the Loudness War trend.
 
-If you want some music to listen too during reading please go to (**Conclusion -> Source**) 
+If you want some music to listen too during reading please go to **Conclusion -> Source** 
 
 
 Red Hot Chili Peppers {data-navmenu=Background}
@@ -315,9 +315,9 @@ Column {data-width=350}
 
 ### Notes
 
-Spotify uses a feature called Energy, which is based on dynamic range, perceived loudness, timbre, onset rate, and general entropy. Since I work with Loudness I thought it would be interesting to see how much loudness and energy would overlap.
+Spotify uses a feature called Energy, which is based on dynamic range, perceived loudness, timbre, onset rate, and general entropy. Since I work with loudness I thought it would be interesting to see how much loudness and energy would overlap.
 
-What i found interesting was the fact that while the energy clearly declined during the 10s and 20s the loudness declined only slowly.
+What I found interesting was the fact that while the energy clearly declined during the 10s and 20s the loudness declined only slowly.
 
 
 
@@ -352,12 +352,12 @@ Column {data-width=350}
 
 ### Notes
 
-Spotifiy data works with timbre coefficients (c01-c12)
+Spotify data works with timbre coefficients (c01-c12)
 For this corpus its only necessary to understand that c01 represents the loudness coefficient 
 
-I choose to make 2 cepstrograms, The c01 coefficient is obvious the most interesting factor to focus on here. As explained in the introduction the loudness war has an influence on the dynamic range. This is very good visible in these examples :
+I choose to make 2 cepstrograms, The c01 coefficient is obvious the most interesting factor to focus on here. As explained in the introduction the loudness war has an influence on the dynamic range. This is very good visible in these examples:
 
-The song Snow from 2006 has a lot of homogenity in the c01 factor which represents the same loudness trough the entire song, apart form the intro and outro.
+The song Snow from 2006 has a lot of homogeneity in the c01 factor which represents the same loudness trough the entire song, apart form the intro and the outro.
 
 On the other hand the song Under The Bridge from 1991 is very different. The c01 from this graph is obviously more different throughout the entire song, which snow a lot of dynamic range through the entire song.
 
@@ -388,12 +388,12 @@ Column {data-width=350}
 
 ### Notes
 
-So what we see here on the x-axis are the timbre coeffiecients. (c01-c12)
+So what we see here on the x-axis are the timbre coefficients. (c01-c12)
 I mainly want to focus c01 here. This represents the loudness.
 
 Please zoom in so its better to follow, 
 you can clearly see that the 00s have a much smaller range than the other decades.
-With a bit of imagination you can see the same features as seen by the Boxplot by the Main charts.
+With a bit of imagination you can see the same features as seen by the boxplot by the Main charts.
 
 
 
@@ -466,24 +466,24 @@ If I dive a little deeper I can see something interesting. Lets just look at the
 Conclusion {data-navmenu=Conclusion}
 =======================================================================
 
-I think the results are clear enough to say that their indeed was a Loundess War that took place since the 80s until the 00. Then at the same time Streaming services started to take off, Loundess did really decrease. This is prove that their is correlation between the rise of streaming services and the decline of loudness. Which for us as consumers of music is in my opinion a good thing. 
+I think the results are clear enough to say that their indeed was a Loudness War that took place since the 80s until the 00s. Then at the same time streaming services started to take off, loudness did really decrease. This is prove that their is correlation between the rise of streaming services and the decline of loudness. Which for us as consumers of music is in my opinion a good thing. 
 
-However as I mentioned by the energy graph, The energy did not so much decline since the 10s as the loudness did. This really begs the question what kind of production methods music producers use to gain the same amount of energy impact on listeners as they did before with sheer loudness. This would be a really great follow up research.
+However I would have loved to compare the perceived loudness to the loudness factor. Although perceived loudness is part of the energy factor it is unclear how much this really affects this variable. If Spotify decides to release this feature as a single value than it would be a really great follow up research to search how much the perceived loudness declined after the 00s, of if music producers found another way to make it loud.
 
-**So is the Loudness war really over?** 
+**So is the Loudness War really over?**
 
-Yes if we look at sheer loudness levels, however I think the war moved to another domain. Mainly to music production skills for streaming services. Since normalezation is the standard there, it leveled the playing field on sheer loudness, but not on perceived loudness.
+Yes if we look at sheer loudness levels, however I suspect the war moved to another domain. Mainly to music production skills for streaming services. Since normalization is the standard there, it leveled the playing field on sheer loudness, but not on perceived loudness.
 
 
 
 Discussion {data-navmenu=Conclusion}
 =======================================================================
 
-While I stand for my conlclusion this reasearch is limited any in an ideal world would not be affected by the following points:
+While I stand for my conclusion this research is limited and in an ideal world would not be affected by the following points:
 
-One thing what really affect this research is the influence of remasters. For example Smooth Criminial from Michael Jackson in the playlist I used is an Remaster. Sadly more often than not the original master isn't available on Spotify. So the original data is not always available for this research, this makes the research less of a representation than I wished for.
+One thing what really affect this research is the influence of remasters. For example Smooth Criminial from Michael Jackson in the playlist I used is a remaster. Sadly more often than not the original master isn't available on Spotify. So the original data is not always available for this research, this has the possiblity to corrupt the used data.
 
-Also the representation is severly limited by the amount of data it covers, since I was not able to track all the music in the world i have picked the All out Playlist from the 70-20s to make my case. It's of course imaginable that with much more data the results of this research would have been different.
+Also the representation is limited by the amount of data it covers, since I was not able to track all the music in the world i have picked the All out Playlist from the 70-20s to make my case. It's of course imaginable that with much more data the results of this research would have been different.
 
 
 Source {data-navmenu=Conclusion}
